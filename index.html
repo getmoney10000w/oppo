@@ -1,0 +1,737 @@
+<html><head><meta charset='utf-8'></head><body style='margin:0;'><div id='game-container'>
+  <div style="width:100%; background-color:#fff5f7; border-radius:15px; padding:10px; box-shadow:0 4px 8px rgba(0, 0, 0, 0.1); font-family:'Comic Sans MS', cursive, sans-serif; font-size:14px; text-align:center;">
+    <h1 style="font-size:32px; color:#ff6b8b; text-shadow:2px 2px 4px rgba(0, 0, 0, 0.1); margin-bottom:20px; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; white-space:nowrap;"><img style="background:transparent; height:60px; margin-right:10px;" src="https://jbang-ai-v2.oss-cn-shenzhen.aliyuncs.com/ai/other/image/20250305105743ewai.png"> 英语单词消消乐对战版</h1>
+    
+    <div style="margin:0px 0px; max-width:100%; text-align:center; background-color:#ffffff; padding:10px; border-radius:20px; box-shadow:0 6px 15px rgba(255, 107, 139, 0.15); border:3px dashed #ffb6c1;">
+      <textarea id="codeInput" style="width:1px; height:1px;">  &lt;div&gt;
+ &lt;title&gt;单词消消乐对战版&lt;/title&gt;
+ &lt;style&gt;
+ body {
+ width: 100%;
+ min-height: 600px;
+ background-color: #f0f8ff;
+ border-radius: 15px;
+ padding: 20px;
+ font-family: 'Arial', cursive, sans-serif;
+ text-align: center;
+ position: relative;
+ overflow: hidden;
+ padding: 0;
+ margin: 0;
+ box-sizing: border-box;
+ padding: 10px;
+ }
+
+h1 {
+ font-size: 30px;
+ color: #ff6b8b;
+ text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+ margin-bottom: 20px;
+ margin-top: 0px;
+ }
+
+.game-area {
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ gap: 20px;
+}
+
+.player-side {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ border-radius: 15px;
+ padding: 10px;
+ box-sizing: border-box;
+}
+
+.player-1 {
+ background-color: rgba(255, 182, 193, 0.2);
+}
+
+.player-2 {
+ background-color: rgba(126, 192, 238, 0.2);
+}
+
+.player-name {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-bottom: 10px;
+}
+
+.player-name input {
+ border: none;
+ border-bottom: 2px solid #ff6b8b;
+ background: transparent;
+ font-size: 18px;
+ font-weight: bold;
+ text-align: center;
+ color: #ff6b8b;
+ padding: 5px;
+ width: 150px;
+ margin: 0 10px;
+}
+
+.player-name-2 input {
+ border-bottom: 2px solid #7ec0ee;
+ color: #7ec0ee;
+}
+
+.meaning-box {
+ width: 100%;
+ height: 70px;
+ background-color: #fff;
+ border-radius: 20px;
+ margin-bottom: 20px;
+ padding: 10px;
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+ border: 3px dashed #ff6b8b;
+ position: relative;
+ box-sizing: border-box;
+}
+
+.meaning-box-2 {
+ border: 3px dashed #7ec0ee;
+}
+
+.meaning-box&gt;p {
+ margin: 0;
+ line-height: 50px;
+}
+
+.meaning-box&gt;div {
+ position: absolute;
+ top: 50%;
+ left: 20px;
+ transform: translateY(-50%);
+ background-color: #ff6b8b;
+ color: white;
+ padding: 5px 15px;
+ border-radius: 15px;
+ font-size: 18px;
+}
+
+.meaning-box-2&gt;div {
+ background-color: #7ec0ee;
+}
+
+.bubbles-container {
+ position: relative;
+ min-height: 350px;
+ height: calc(100vh - 350px);
+ width: 100%;
+ margin-bottom: 10px;
+ border: 2px dashed rgba(126, 192, 238, 0.3);
+ border-radius: 15px;
+ overflow: hidden;
+ box-sizing: border-box;
+}
+
+.bubble {
+ position: absolute;
+ width: 80px;
+ height: 80px;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ cursor: pointer;
+ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+ transition: transform 0.3s ease;
+}
+
+.bubble span {
+ font-size: 14px;
+ color: #333333;
+ font-weight: bold;
+ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.progress-container {
+ display: flex;
+ align-items: center;
+ margin-top: 10px;
+ margin-bottom: 10px;
+}
+
+.progress-bar {
+ flex: 1;
+ height: 20px;
+ background-color: #f0f0f0;
+ border-radius: 10px;
+ overflow: hidden;
+ margin-right: 10px;
+}
+
+.progress {
+ height: 100%;
+ background-color: #ff6b8b;
+ width: 0%;
+ transition: width 0.5s ease;
+}
+
+.progress-2 {
+ background-color: #7ec0ee;
+}
+
+.progress-percent {
+ font-weight: bold;
+ min-width: 50px;
+}
+
+.final-result {
+ display: none;
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ width: 80%;
+ max-width: 500px;
+ background-color: #fff;
+ border-radius: 20px;
+ padding: 30px;
+ box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+ border: 3px dashed #7ec0ee;
+ text-align: center;
+ z-index: 1000;
+ overflow: hidden;
+}
+
+.final-result h2 {
+ color: #ff6b8b;
+ font-size: 28px;
+ margin-bottom: 15px;
+}
+
+.final-result button {
+ background-color: #ff6b8b;
+ color: white;
+ border: none;
+ padding: 12px 30px;
+ border-radius: 25px;
+ font-size: 18px;
+ cursor: pointer;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ transition: all 0.3s ease;
+ margin-top: 15px;
+}
+
+.confetti {
+ position: absolute;
+ width: 10px;
+ height: 10px;
+ background-color: #f0f0f0;
+ opacity: 0.8;
+ animation: confetti-fall 5s ease-in-out forwards;
+}
+
+@keyframes confetti-fall {
+ 0% {
+   transform: translateY(-100px) rotate(0deg);
+   opacity: 1;
+ }
+ 100% {
+   transform: translateY(500px) rotate(720deg);
+   opacity: 0;
+ }
+}
+
+.vs-title {
+ font-size: 36px;
+ font-weight: bold;
+ color: #333;
+ margin: 15px 0;
+ text-transform: uppercase;
+}
+
+.winner-name {
+ font-size: 32px;
+ font-weight: bold;
+ color: #ff6b8b;
+ margin: 10px 0;
+ text-transform: uppercase;
+}
+
+.winner-badge {
+ display: inline-block;
+ background-color: gold;
+ color: #333;
+ padding: 5px 15px;
+ border-radius: 20px;
+ font-weight: bold;
+ margin-left: 10px;
+ text-transform: uppercase;
+}
+
+.overlay {
+ display: none;
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background-color: rgba(0, 0, 0, 0.5);
+ z-index: 999;
+}
+ &lt;/style&gt;
+
+ &lt;body&gt;
+ &lt;h1 style="display: flex;justify-content: center;align-items: center;flex-wrap: wrap;white-space: nowrap;"&gt;&lt;img style="height: 60px;margin-right: 10px;"
+ src="https://jbang-ai-v2.oss-cn-shenzhen.aliyuncs.com/ai/other/image/20250305105743ewai.png"&gt; 单词消消乐对战版&lt;/h1&gt;
+
+&lt;div class="game-area"&gt;
+ &lt;div class="player-side player-1"&gt;
+   &lt;div class="player-name"&gt;
+     &lt;span&gt;玩家1:&lt;/span&gt;
+     &lt;input type="text" id="player1-name" value="小红" placeholder="输入名称"&gt;
+   &lt;/div&gt;
+   
+   &lt;div class="meaning-box" id="meaning-box-1"&gt;
+     &lt;div&gt;单词释义&lt;/div&gt;
+     &lt;p id="current-meaning-1"&gt;橡皮&lt;/p&gt;
+   &lt;/div&gt;
+   
+   &lt;div class="bubbles-container" id="bubbles-container-1"&gt;&lt;/div&gt;
+   
+   &lt;div class="progress-container"&gt;
+     &lt;div class="progress-percent" id="accuracy-1"&gt;正确率: 0%&lt;/div&gt;
+     &lt;div class="progress-bar"&gt;
+       &lt;div class="progress" id="progress-1"&gt;&lt;/div&gt;
+     &lt;/div&gt;
+   &lt;/div&gt;
+ &lt;/div&gt;
+ 
+ &lt;div class="player-side player-2"&gt;
+   &lt;div class="player-name player-name-2"&gt;
+     &lt;span&gt;玩家2:&lt;/span&gt;
+     &lt;input type="text" id="player2-name" value="小蓝" placeholder="输入名称"&gt;
+   &lt;/div&gt;
+   
+   &lt;div class="meaning-box meaning-box-2" id="meaning-box-2"&gt;
+     &lt;div&gt;单词释义&lt;/div&gt;
+     &lt;p id="current-meaning-2"&gt;橡皮&lt;/p&gt;
+   &lt;/div&gt;
+   
+   &lt;div class="bubbles-container" id="bubbles-container-2"&gt;&lt;/div&gt;
+   
+   &lt;div class="progress-container"&gt;
+     &lt;div class="progress-percent" id="accuracy-2"&gt;正确率: 0%&lt;/div&gt;
+     &lt;div class="progress-bar"&gt;
+       &lt;div class="progress progress-2" id="progress-2"&gt;&lt;/div&gt;
+     &lt;/div&gt;
+   &lt;/div&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="overlay" id="result-overlay"&gt;&lt;/div&gt;
+&lt;div class="final-result" id="final-result"&gt;
+ &lt;h2 id="winner-title"&gt;比赛结束！&lt;/h2&gt;
+ &lt;div class="vs-title"&gt;&lt;span id="player1-name-display"&gt;小红&lt;/span&gt; VS &lt;span id="player2-name-display"&gt;小蓝&lt;/span&gt;&lt;/div&gt;
+ &lt;div class="winner-name"&gt;&lt;span id="winner-name"&gt;&lt;/span&gt; &lt;span class="winner-badge"&gt;胜利&lt;/span&gt;&lt;/div&gt;
+ &lt;p id="player1-final-score" style="font-size: 18px;"&gt;&lt;/p&gt;
+ &lt;p id="player2-final-score" style="font-size: 18px;"&gt;&lt;/p&gt;
+ &lt;button id="restart-battle"&gt;再来一局&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+ 
+const wordsList = [
+{ word: 'book', meaning: '书;书籍', color: '#c7b0ff' },
+{ word: 'pen', meaning: '钢笔', color: '#b0daff' },
+{ word: 'pencil', meaning: '铅笔', color: '#ffb66b' },
+{ word: 'chair', meaning: '椅子', color: '#ff9cda' },
+{ word: 'table', meaning: '桌子', color: '#9cffb0' },
+{ word: 'bed', meaning: '床', color: '#ffda9c' },
+{ word: 'window', meaning: '窗户', color: '#b0daff' },
+{ word: 'door', meaning: '门', color: '#ffb66b' },
+{ word: 'clock', meaning: '时钟', color: '#ff9cda' },
+{ word: 'lamp', meaning: '灯', color: '#9cffb0' },
+{ word: 'cup', meaning: '杯子', color: '#ffda9c' },
+{ word: 'plate', meaning: '盘子', color: '#b0daff' },
+{ word: 'bottle', meaning: '瓶子', color: '#ffb66b' },
+{ word: 'key', meaning: '钥匙', color: '#ff9cda' },
+{ word: 'phone', meaning: '电话', color: '#9cffb0' },
+{ word: 'computer', meaning: '计算机', color: '#ffda9c' },
+{ word: 'TV', meaning: '电视', color: '#b0daff' },
+{ word: 'fridge', meaning: '冰箱', color: '#ffb66b' },
+{ word:'sofa', meaning: '沙发', color: '#ff9cda' },
+{ word: 'car', meaning: '汽车', color: '#9cffb0' }
+];
+// 玩家1数据
+let player1 = {
+ currentWordIndex: 0,
+ correctCount: 0,
+ totalAttempts: 0,
+ bubblesRemaining: wordsList.length,
+ bubbles: [],
+ bubbleDirections: [],
+ animationFrameId: null,
+ completed: false
+};
+
+// 玩家2数据
+let player2 = {
+ currentWordIndex: 0,
+ correctCount: 0,
+ totalAttempts: 0,
+ bubblesRemaining: wordsList.length,
+ bubbles: [],
+ bubbleDirections: [],
+ animationFrameId: null,
+ completed: false
+};
+
+const bubbleSpeed = 0.5;
+
+function initGame() {
+ // 重置玩家1
+ player1.currentWordIndex = 0;
+ player1.correctCount = 0;
+ player1.totalAttempts = 0;
+ player1.bubblesRemaining = wordsList.length;
+ player1.bubbles = [];
+ player1.bubbleDirections = [];
+ player1.completed = false;
+
+ // 重置玩家2
+ player2.currentWordIndex = 0;
+ player2.correctCount = 0;
+ player2.totalAttempts = 0;
+ player2.bubblesRemaining = wordsList.length;
+ player2.bubbles = [];
+ player2.bubbleDirections = [];
+ player2.completed = false;
+
+ // 取消动画帧
+ if (player1.animationFrameId) {
+   cancelAnimationFrame(player1.animationFrameId);
+ }
+ if (player2.animationFrameId) {
+   cancelAnimationFrame(player2.animationFrameId);
+ }
+
+ // 设置初始词义
+ document.getElementById('current-meaning-1').textContent = wordsList[player1.currentWordIndex].meaning;
+ document.getElementById('current-meaning-2').textContent = wordsList[player2.currentWordIndex].meaning;
+ 
+ // 重置进度和准确率显示
+ document.getElementById('accuracy-1').textContent = '正确率: 0%';
+ document.getElementById('accuracy-2').textContent = '正确率: 0%';
+ document.getElementById('progress-1').style.width = '0%';
+ document.getElementById('progress-2').style.width = '0%';
+ 
+ // 隐藏最终结果
+ document.getElementById('final-result').style.display = 'none';
+ document.getElementById('result-overlay').style.display = 'none';
+ 
+ // 清除所有五彩纸屑
+ const existingConfetti = document.querySelectorAll('.confetti');
+ existingConfetti.forEach(item =&gt; item.remove());
+
+ // 创建气泡并开始动画
+ createBubbles(1);
+ createBubbles(2);
+ animateBubbles(1);
+ animateBubbles(2);
+}
+
+function createBubbles(playerNum) {
+ const container = document.getElementById('bubbles-container-' + playerNum);
+ container.innerHTML = '';
+ 
+ const player = playerNum === 1 ? player1 : player2;
+ player.bubbleDirections = [];
+
+ const positions = [];
+ const bubbleSize = 70; // 稍微小一点的气泡
+ const margin = 10;
+
+ wordsList.forEach((word, index) =&gt; {
+   let validPosition = false;
+   let posX, posY;
+   let attempts = 0;
+
+   while (!validPosition &amp;&amp; attempts &lt; 100) {
+     posX = Math.random() * (container.clientWidth - bubbleSize - margin * 2) + margin;
+     posY = Math.random() * (container.clientHeight - bubbleSize - margin * 2) + margin;
+
+ validPosition = true;
+
+ for (const pos of positions) {
+       const distance = Math.sqrt(Math.pow(posX - pos.x, 2) + Math.pow(posY - pos.y, 2));
+       if (distance &lt; bubbleSize + margin) {
+         validPosition = false;
+         break;
+       }
+     }
+
+ attempts++;
+   }
+
+   positions.push({ x: posX, y: posY });
+
+   const bubble = document.createElement('div');
+   bubble.className = 'bubble';
+   bubble.style.width = bubbleSize + 'px';
+   bubble.style.height = bubbleSize + 'px';
+   bubble.style.left = posX + 'px';
+   bubble.style.top = posY + 'px';
+
+   const baseColor = word.color;
+   const lighterColor = getLighterColor(baseColor, 30);
+   const darkerColor = getDarkerColor(baseColor, 20);
+   bubble.style.background = 'radial-gradient(circle at 30% 30%, ' + lighterColor + ', ' + baseColor + ' 60%, ' + darkerColor;
+
+   const span = document.createElement('span');
+   span.textContent = word.word;
+   bubble.appendChild(span);
+
+   bubble.onclick = () =&gt; handleBubbleClick(word.word, bubble, playerNum);
+   container.appendChild(bubble);
+   player.bubbles.push(bubble);
+
+   const angle = Math.random() * Math.PI * 2;
+   player.bubbleDirections.push({
+     dx: Math.cos(angle) * bubbleSpeed,
+     dy: Math.sin(angle) * bubbleSpeed
+   });
+ });
+}
+
+function getLighterColor(hex, percent) {
+ return adjustColor(hex, percent);
+}
+
+function getDarkerColor(hex, percent) {
+ return adjustColor(hex, -percent);
+}
+
+function adjustColor(hex, percent) {
+ hex = hex.replace('#', '');
+
+ let r = parseInt(hex.substring(0, 2), 16);
+ let g = parseInt(hex.substring(2, 4), 16);
+ let b = parseInt(hex.substring(4, 6), 16);
+
+ r = Math.min(255, Math.max(0, r + Math.floor(r * percent / 100)));
+ g = Math.min(255, Math.max(0, g + Math.floor(g * percent / 100)));
+ b = Math.min(255, Math.max(0, b + Math.floor(b * percent / 100)));
+
+ return '#' + r.toString(16).padStart(2, '0') + g.toString(16).padStart(2, '0') + b.toString(16).padStart(2, '0');
+}
+
+function animateBubbles(playerNum) {
+ const player = playerNum === 1 ? player1 : player2;
+ const container = document.getElementById('bubbles-container-' + playerNum);
+ const containerRect = container.getBoundingClientRect();
+
+ for (let i = 0; i &lt; player.bubbles.length; i++) {
+   if (player.bubbles[i].style.display === 'none') continue;
+
+   const bubble = player.bubbles[i];
+   const bubbleRect = bubble.getBoundingClientRect();
+   const relativeRect = {
+     left: bubbleRect.left - containerRect.left,
+     top: bubbleRect.top - containerRect.top,
+     right: bubbleRect.right - containerRect.left,
+     bottom: bubbleRect.bottom - containerRect.top,
+     width: bubbleRect.width,
+     height: bubbleRect.height
+   };
+
+   let newLeft = parseFloat(bubble.style.left) + player.bubbleDirections[i].dx;
+   let newTop = parseFloat(bubble.style.top) + player.bubbleDirections[i].dy;
+
+   if (newLeft &lt;= 0 || newLeft + relativeRect.width &gt;= containerRect.width) {
+     player.bubbleDirections[i].dx *= -1;
+     newLeft = parseFloat(bubble.style.left) + player.bubbleDirections[i].dx;
+   }
+
+   if (newTop &lt;= 0 || newTop + relativeRect.height &gt;= containerRect.height) {
+     player.bubbleDirections[i].dy *= -1;
+     newTop = parseFloat(bubble.style.top) + player.bubbleDirections[i].dy;
+   }
+
+   bubble.style.left = newLeft + 'px';
+   bubble.style.top = newTop + 'px';
+ }
+
+ player.animationFrameId = requestAnimationFrame(() =&gt; animateBubbles(playerNum));
+}
+
+function handleBubbleClick(clickedWord, bubbleElement, playerNum) {
+ const player = playerNum === 1 ? player1 : player2;
+ 
+ if (player.completed) return;
+ 
+ player.totalAttempts++;
+ 
+ if (clickedWord === wordsList[player.currentWordIndex].word) {
+   player.correctCount++;
+   player.bubblesRemaining--;
+
+   bubbleElement.style.transition = 'all 0.5s ease';
+   bubbleElement.style.transform = 'scale(1.2)';
+   setTimeout(() =&gt; {
+     bubbleElement.style.transform = 'scale(0)';
+     bubbleElement.style.opacity = '0';
+     setTimeout(() =&gt; {
+       bubbleElement.style.display = 'none';
+
+   // 检查是否所有气泡都被消除
+       if (player.bubblesRemaining === 0) {
+         playerCompleted(playerNum);
+       } else {
+         player.currentWordIndex = (player.currentWordIndex + 1) % wordsList.length;
+         document.getElementById('current-meaning-' + playerNum).textContent = wordsList[player.currentWordIndex].meaning;
+       }
+     }, 500);
+   }, 500);
+ } else {
+   bubbleElement.animate(
+     [{ transform: 'translateX(0)' }, { transform: 'translateX(-10px)' }, { transform: 'translateX(10px)' }, { transform: 'translateX(0)' }],
+     { duration: 500, iterations: 2 }
+   );
+ }
+
+ updateProgress(playerNum);
+}
+
+function updateProgress(playerNum) {
+ const player = playerNum === 1 ? player1 : player2;
+ const accuracy = player.totalAttempts === 0 ? 0 : Math.round((player.correctCount / player.totalAttempts) * 100);
+ 
+ document.getElementById('accuracy-' + playerNum).textContent = '正确率: ' + accuracy + '%';
+ 
+ // 更新完成进度条
+ const progress = 100 - (player.bubblesRemaining / wordsList.length * 100);
+ document.getElementById('progress-' + playerNum).style.width = progress + '%';
+}
+
+function playerCompleted(playerNum) {
+ const player = playerNum === 1 ? player1 : player2;
+ player.completed = true;
+ 
+ console.log('Player ' + playerNum + ' completed!');
+ console.log('Player 1 completed: ' + player1.completed);
+ console.log('Player 2 completed: ' + player2.completed);
+ 
+ // 检查两名玩家是否都完成了游戏
+ if (player1.completed &amp;&amp; player2.completed) {
+   console.log('Both players completed, showing final result!');
+   showFinalResult();
+ }
+}
+
+function createConfetti() {
+ const finalResult = document.getElementById('final-result');
+ const colors = ['#ff6b8b', '#7ec0ee', '#ffdf6b', '#a5d6a7', '#ce93d8', '#fff59d'];
+ 
+ for (let i = 0; i &lt; 100; i++) {
+   const confetti = document.createElement('div');
+   confetti.className = 'confetti';
+   confetti.style.left = Math.random() * 100 + '%';
+   confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+   confetti.style.width = Math.random() * 10 + 5 + 'px';
+   confetti.style.height = Math.random() * 10 + 5 + 'px';
+   confetti.style.animationDelay = Math.random() * 5 + 's';
+   confetti.style.animationDuration = Math.random() * 3 + 3 + 's';
+   
+   finalResult.appendChild(confetti);
+ }
+}
+
+function showFinalResult() {
+ // 取消动画
+ if (player1.animationFrameId) {
+   cancelAnimationFrame(player1.animationFrameId);
+ }
+ if (player2.animationFrameId) {
+   cancelAnimationFrame(player2.animationFrameId);
+ }
+ 
+ const player1Name = document.getElementById('player1-name').value || '玩家1';
+ const player2Name = document.getElementById('player2-name').value || '玩家2';
+ 
+ // 更新VS显示
+ document.getElementById('player1-name-display').textContent = player1Name.toUpperCase();
+ document.getElementById('player2-name-display').textContent = player2Name.toUpperCase();
+ 
+ const player1Accuracy = player1.totalAttempts === 0 ? 0 : Math.round((player1.correctCount / player1.totalAttempts) * 100);
+ const player2Accuracy = player2.totalAttempts === 0 ? 0 : Math.round((player2.correctCount / player2.totalAttempts) * 100);
+ 
+ document.getElementById('player1-final-score').textContent = player1Name + ' 的正确率: ' + player1Accuracy + '%';
+ document.getElementById('player2-final-score').textContent = player2Name + ' 的正确率: ' + player2Accuracy + '%';
+ 
+ // 判断胜负
+ let winnerName = '';
+ if (player1Accuracy &gt; player2Accuracy) {
+   winnerName = player1Name;
+ } else if (player2Accuracy &gt; player1Accuracy) {
+   winnerName = player2Name;
+ } else {
+   winnerName = '平局! ' + player1Name + ' &amp; ' + player2Name;
+   document.querySelector('.winner-badge').textContent = '并列第一';
+ }
+ 
+ document.getElementById('winner-name').textContent = winnerName.toUpperCase();
+ 
+ // 显示结果弹窗和遮罩
+ document.getElementById('result-overlay').style.display = 'block';
+ document.getElementById('final-result').style.display = 'block';
+ 
+ // 创建撒花效果
+ createConfetti();
+}
+
+document.getElementById('restart-battle').onclick = function() {
+ initGame();
+};
+
+window.onload = initGame;
+
+&lt;/script&gt;
+&lt;/div&gt;
+      </textarea>
+      
+      <div style="background-color:#f8f9ff; padding:10px; border-radius:15px; margin-bottom:25px; text-align:left; font-size:16px; color:#555;">
+        <p>🌟 <b>游戏目标：</b>两名玩家同时比拼，看谁能更快更准确地消除单词气泡！</p>
+        <p>🎮 <b>对战模式：</b>屏幕分为左右两个区域，每位玩家在各自区域内进行游戏。</p>
+        <p>🎯 <b>玩法说明：</b>根据中文释义，点击正确的英文单词气泡。</p>
+        <p>📊 <b>胜负判定：</b>当双方都完成游戏后，系统会根据正确率判定胜负。</p>
+      </div>
+      
+      <div class="j-event" style="display:flex; justify-content:center; margin-top:20px;">
+        <div style="background-color:#ffe8ec; padding:15px; border-radius:15px; width:48%; margin-right:15px; box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+          <span style="font-size:36px;">🏆</span>
+          <h3 style="color:#ff6b8b; font-size:18px; margin-bottom:10px;">对战技巧</h3>
+          <p>专注自己的区域，不要被对手的进度分心，保持冷静和准确性！</p>
+        </div>
+        
+        <div style="background-color:#e8f4ff; padding:10px; border-radius:15px; width:48%; box-shadow:0 4px 8px rgba(0,0,0,0.05);">
+          <span style="font-size:36px;">👥</span>
+          <h3 style="color:#7ec0ee; font-size:18px; margin-bottom:10px;">双人模式</h3>
+          <p>可以自定义玩家名称，与朋友一起比拼单词记忆力和反应速度！</p>
+        </div>
+      </div>
+      
+<button onclick="const userAgent = navigator.userAgent.toLowerCase();   const isIosWechat = /micromessenger/.test(userAgent) &amp;&amp; /iphone|ipad|ipod/.test(userAgent);   if(isIosWechat){ alert('微信暂不支持游戏，请打开Safari浏览器使用'); return  }; const dialog = document.createElement('dialog');   dialog.style.border = 'none';   dialog.style.borderRadius = '12px';   dialog.style.padding = '0px';   dialog.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';   dialog.style.width = '100vw';   dialog.style.height = '100vh';   dialog.style.margin = '0';   dialog.style.maxWidth= '100vw';   dialog.style.maxHeight= '100vh';        const closeIcon = document.createElement('div'); closeIcon.innerHTML = '+'; closeIcon.style.position = 'absolute'; closeIcon.style.width = '40px'; closeIcon.style.height = '40px'; closeIcon.style.top = '5px'; closeIcon.style.right = '0px'; closeIcon.style.fontSize = '45px'; closeIcon.style.transform= 'rotate(45deg)'; closeIcon.style.cursor= 'pointer'; closeIcon.style.color= '#ff5252';   const iframe = document.createElement('iframe');   iframe.srcdoc = document.getElementById('codeInput').value;   iframe.style.width = '100%';   iframe.style.height = '100%';   iframe.style.border = 'none';    dialog.appendChild(iframe);   dialog.appendChild(closeIcon);   document.body.appendChild(dialog);   dialog.showModal();    dialog.addEventListener('click', (e) => {     if (e.target === dialog) dialog.close();   });   closeIcon.addEventListener('click', (e) => {     dialog.close();   });" style="background-color:#ff6b8b; color:white; border:none; padding:15px 35px; border-radius:30px; font-size:20px; font-weight:bold; cursor:pointer; display:block; margin:30px auto 10px; box-shadow:0 6px 12px rgba(255, 107, 139, 0.3);">开始对战</button>
+  
+      <p>点击按钮，开始你的单词消消乐挑战吧！</p>
+      <div style="color:#ff6b8b; cursor:pointer; display:flex; justify-content:center; align-items:center;"><div style="color:#ff6b8b;;cursor: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAABU5JREFUWEe9l2tsFFUUx//nzsy23RaKaZnStN3dCQWMaCAQCUFNMBalRqNgiR8sIjF+JNQYIdHEKGh8RB4JGu2GIBoiREQRISomysM14iOIPLQFO9N0+8BdGuhj233MXHN3ZrfLuttKNTvJZHf23rvnd/7n3HPuEPJcHo9nFWPsJSKaCaAdwHO6rn+eb/5kf6dcC71e7wpG7JNqWFjCEzhOMkIgyzTNxq6urqOTNZZrXU4ATdNOVXBr0XEMwc0IAxLhrrgbA6BvDMO4pxAAfQ1IVPmlUUCi5L06WoTvTNZhGIYIyf925VPg8jKWUFtdUYDZAM0RFwKJQgJIptpaEgMk2ACDCgKxQgIoptpaFk+HoPmqjMAoFTAERabaWp4AZJZUoTkkITBSSIBiS22tNMcU6GUIRFBABdxcba2yANlJwiAQGCwkQBlXW2u4rYBMaNaBwAAvnAINU7nq99reJwEuWghc5RxAD+d87/Dw8KZwODz4XwtCZh0oqqmpmd7d3d2jaVpvwzSo/pksHYKt3Rb6LaBtiOOHK5ZgOs85X22aphkMBtsARCcDkwTw+XwtRLQJwBTOeSeA6csqyO2fIzm7QKhg1wMoDAcuW3j61ChkUaTs6xqALbquvwLAuhEQ8nq9jxGjPbe5gYZphH1hoC8GNFQS/HPldAiSyegkpIDYfDaG6ikMikw49GcMv/QmQITdnPMdkUikPRQKDf0bEPL5fD+rLiw8OV+CixEuWYS7T8XROEOCf54yZjRlPAWS+exiWPf1EI78EYNIEiKMWpa10zTNDcFgcGQ8EAEQebiKlWyrlxyJCY0/xVFXSvAvdNkhyDbuJGYqQcV4OAHs/z2KqaUMx9qj+PK8CBFE97wXgJkPIgmwsloq2XKzkBtJY5svmega4fAvLs4dgsxwpGCyFNl+cgjbDl8DgT/Z2dm5Ky+Apmlt88pp9qeLXXbnkwlnI8COthj8d5ZkeC+UcBIxW5VsRSSCWcywYGMQgyP8qK7r942nwG4C1px70A13OskIfQlghtuRP9O7tMeiR2QkZmqOo6LQf60/hGNnIn2GYVTnBfB4PE0gtn/7kmKs8DhJl9PgWFEai73dqK4DcQ4wQskN+/rx8beDcV3XXXkBamtrS2RZ7l6gSjcdaCxLhyEzwXJ6mgsyZdz5bHk/hM+ODUYMwyjNCyAGvF7vGyanZw+vmop5laL4CG9zyJ+W2ZE+8zlt3FHExbDyxSB+bY+267o+ZyKAaiK6dHut4v6oqRxgGcmWGef0d3u3JCFTIcj0XiaMMMLcRy+KuvCBYRhrxgUQg5qmvRw3+fNvPVKOh2YX2QayZc6GyZI8vUsYYd/3g9i4tU9sw6bOzs4DEwKIXFAU5Te3jPqvWlTUlGUVoH8YEwrg+pwRcxghrhCWPtWB3r8SXbqui1N0fEIAMaG2tnaRoign6lW56OB61d6WqTtZI0Ro8sieNA5AIby+9wre2RMWJXmtYRi7xy3F2YM+n+8JAO/N97iwp6UKpS5m//F4Cecc3cWcQz8OYd0LQTAJXxiGcf9EDSnne4HP51sPYJtnukw7n6nGrEqnKybD4CRoZkgEoIvh3YP9eO3tyyCGCwDuMAzj6qQAxCLxcipJ0i5wXta8vByPL5+Geo/LbitJj21VrCKGE6eHsXVXCGcujECS6GQ0Gl3Z09MTnsi4GM+pQGphXV3dTFmWtwN4IBqzUKMquHVWMSqEIkQIheM4fS6C/gETisyucc5fNQzjzfG6XzbUuACpyZqmzbEsq4kxtpRzfgsRVThjIQBnOOdHGGMfdnR0iJPRDV1/A/S02zBdMZSwAAAAAElFTkSuQmCC&quot;) 6 3, pointer !important;" onclick="function getParent(dom){ if(dom.parentElement.tagName==='BODY'){ return dom.parentElement};if(dom.parentElement.id==='game-container'){ return dom.parentElement};return getParent(dom.parentElement)};const html=`<html><head><meta charset='utf-8'></head><body style='margin:0;'><div id='game-container'>`+getParent(this).innerHTML+`</div></body></html>`;const blob = new Blob([html], { type: 'application/html' });const url = window.URL.createObjectURL(blob);const a = document.createElement('a');a.href = url;a.download = '单词消消乐对战.html';document.body.appendChild(a);a.click();document.body.removeChild(a);window.URL.revokeObjectURL(url);" class="sweezy-custom-cursor-hover">【下载网页】</div><div style="color:#ff6b8b;" onclick="window.open('https://ai.jbangai.com/app?categoryCode=00020045&amp;invite=aqx3o8xl')">【更多游戏】</div></div>
+    </div>
+  
+    <div id="modalOverlay" style="display:none; width:100%; height:100%; background-color:rgba(0,0,0,0.6); justify-content:center; align-items:center;" onclick="if(event.target === this) {         this.style.display = 'none';       }">
+      <div id="modalContainer" style="width:calc(100% - 200px); height:calc(100% - 200px); background-color:white; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.3); max-width:1200px;">
+        <div id="modalHeader" style="padding:16px 24px; background-color:#ffe8ec; display:flex; justify-content:space-between; align-items:center; border-bottom:3px dashed #ffb6c1;">
+          <span style="font-weight:bold; font-size:22px; color:#ff6b8b;">🎮 英语单词消消乐大比拼</span>
+          <button onclick="document.getElementById('modalOverlay').style.display = 'none';" style="cursor:pointer; background:#ff6b8b; border:none; color:white; display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; font-size:20px;">×</button>
+        </div>
+        <div id="modalContent" style="height:calc(100% - 69px); padding:0;"></div>
+      </div>
+    </div>
+  
+  </div>
+</div></body></html>
